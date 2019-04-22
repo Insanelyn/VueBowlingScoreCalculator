@@ -1,10 +1,11 @@
 <template>
   <div class="BowlingCalculator">
-    <div>score: {{gameArray}}</div>
-    <p>total: {{total}}</p>
-    <li v-for="firstRoll in frameArray" :key="firstRoll"><span>{{firstRoll}}</span></li>
-    <li v-for="secondRoll in frameArray" :key="secondRoll"><span>{{secondRoll}}</span></li>
+<!--     <div>score: {{gameArray}}</div>
+    <div>{{gameArray.length}}</div> -->
 
+<!--     <li v-for="firstRoll in frameArray" :key="firstRoll"><span>{{firstRoll}}</span></li>
+    <li v-for="secondRoll in frameArray" :key="secondRoll"><span>{{secondRoll}}</span></li>
+ -->
     
     
     <button @click="increase" id="0">0</button>
@@ -19,6 +20,20 @@
     <button @click="increase" id="9">9</button>
     <button @click="increase" id="10">10</button>
     <button @click="newGame()">New Game</button>
+
+     <ul>
+    <li class="frame" v-for="frame in gameArray" :key="frame">
+      <p class="rolls firstroll">{{frame.firstRoll}}</p>
+      <p class="rolls secondroll">{{frame.secondRoll}}</p>
+      <p class="frametotal">{{frame.frameTotal}}</p>
+    </li>
+    <li class="frame result">
+      <p>{{total}}</p>
+
+      </li>
+  </ul>
+
+   
     
     </div>
 </template>
@@ -47,18 +62,20 @@ export default {
         const turnObj = {
           firstRoll: this.frameArray[0],
           secondRoll: this.frameArray[1],
-          totalScore: this.frameArray[0] + this.frameArray[1]
+          frameTotal: this.frameArray[0] + this.frameArray[1]
         }
         this.gameArray.push(turnObj)
         this.frameArray = []
-      }
+      } else if(this.gameArray.length === 10) {
+        alert("Start a new game");      }
  
       this.equals()
+
 
    },
   equals(){
     return this.gameArray.reduce((x, y) => {
-      return this.total = x + y.totalScore
+      return this.total = x + y.frameTotal
     }, 0)
   },
 
@@ -76,22 +93,35 @@ export default {
 
 <style scoped>
 .frame {
-  border: 1px black;
+  border: 1px double black;
+  background-color: #42b983;
+  margin: 0;
 }
-h3 {
-  margin: 40px 0 0;
-}
+
 ul {
   list-style-type: none;
   padding: 0;
 }
 li {
   display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;
 }
+.rolls {
+  display: inline-block;
+  padding: 10px;
+  margin:0;
+  }
+.secondroll{
+    border: 1px dotted black;
 
+}
+.result{
+  display: inline-block;
+    margin:0;
+
+
+}
 
 </style>
