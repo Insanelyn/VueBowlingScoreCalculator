@@ -7,21 +7,22 @@
     <li v-for="secondRoll in frameArray" :key="secondRoll"><span>{{secondRoll}}</span></li>
  -->
     
-    
-    <button @click="increase" id="0">0</button>
-    <button @click="increase" id="1">1</button>
-    <button @click="increase" id="2">2</button>
-    <button @click="increase" id="3">3</button>
-    <button @click="increase" id="4">4</button>
-    <button @click="increase" id="5">5</button>
-    <button @click="increase" id="6">6</button>
-    <button @click="increase" id="7">7</button>
-    <button @click="increase" id="8">8</button>
-    <button @click="increase" id="9">9</button>
-    <button @click="increase" id="10">10</button>
+    <div class="scorebtns">
+    <button @click="increase" class="addscorebtn" id="0">0</button>
+    <button @click="increase" class="addscorebtn" id="1">1</button>
+    <button @click="increase" class="addscorebtn" id="2">2</button>
+    <button @click="increase" class="addscorebtn" id="3">3</button>
+    <button @click="increase" class="addscorebtn" id="4">4</button>
+    <button @click="increase" class="addscorebtn" id="5">5</button>
+    <button @click="increase" class="addscorebtn" id="6">6</button>
+    <button @click="increase" class="addscorebtn" id="7">7</button>
+    <button @click="increase" class="addscorebtn" id="8">8</button>
+    <button @click="increase" class="addscorebtn" id="9">9</button>
+    <button @click="increase" class="addscorebtn" id="10">10</button>
     <button @click="newGame()">New Game</button>
+    </div>
 
-     <ul>
+     <ul class="fullframe">
     <li class="frame" v-for="frame in gameArray" :key="frame">
       <p class="rolls firstroll">{{frame.firstRoll}}</p>
       <p class="rolls secondroll">{{frame.secondRoll}}</p>
@@ -42,6 +43,7 @@
 
 
 <script>
+import NewGameButton from './NewGameButton.vue'
 export default {
   data: function (){  
     return {  
@@ -92,19 +94,7 @@ export default {
 
 
 <style scoped>
-.frame {
-  border: 1px double black;
-  background-color: #42b983;
-  margin: 0;
-}
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-}
 a {
   color: #42b983;
 }
@@ -122,6 +112,33 @@ a {
     margin:0;
 
 
+}
+.fullframe{
+  text-align: justify;
+  font-size: 12px; /* IE 9/10 fix */
+  
+}
+.fullframe li {
+ display: inline-block;
+
+  border: 1px double black;
+  background-color: #42b983;
+  margin: 0;
+}
+.fullframe :after {
+  content: '';
+  width: 100%; /* Ensures justification for single lines */
+  display: inline-block;
+}
+.scorebtns {
+    text-align: justify;
+
+}
+.addscorebtn{
+  color:black;
+  background-color: lightcyan;
+  border: 1px dotted black;
+  font-size: 25px;
 }
 
 </style>
