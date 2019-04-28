@@ -19,8 +19,9 @@
     <button @click="increase" class="addscorebtn" id="8">8</button>
     <button @click="increase" class="addscorebtn" id="9">9</button>
     <button @click="increase" class="addscorebtn" id="10">10</button>
-    <button @click="newGame()">New Game</button>
+    <button @click="newGame()" class="newgamebutton">New Game</button>
     </div>
+
 
      <ul class="fullframe">
     <li class="frame" v-for="frame in gameArray" :key="frame">
@@ -61,6 +62,11 @@ export default {
     const id = e.target.id
     this.frameArray.push(parseInt(id, 10))
       if(this.frameArray.length > 1 && this.gameArray.length <= 10) {
+        if(this.id = 10){
+          console.log("hello strike", this.id)
+        }
+                  console.log("hello turnobj", this.id)
+
         const turnObj = {
           firstRoll: this.frameArray[0],
           secondRoll: this.frameArray[1],
@@ -68,23 +74,40 @@ export default {
         }
         this.gameArray.push(turnObj)
         this.frameArray = []
+          
       } else if(this.gameArray.length === 10) {
-        alert("Start a new game");      }
- 
-      this.equals()
+        this.gameOver();  
+        
+        }
 
+      if (id < 10){
+      this.equals()
+      }
 
    },
   equals(){
+    if(this.id = 10){
+      return this.gameArray.reduce((x, y) => {
+      return this.total = x + y.frameTotal + 10
+    }, 0)
+    } else {
     return this.gameArray.reduce((x, y) => {
       return this.total = x + y.frameTotal
     }, 0)
+    }
   },
 
    newGame(){
      this.gameArray = []; 
-     this.frameArray = []
+     this.frameArray = [];
+     this.total = 0;
+   },   
+   
+   gameOver(){
+      alert("Last score has been scored. Start a new game");      
+      
    },
+
   },
   computed: {
   }
@@ -104,41 +127,82 @@ a {
   margin:0;
   }
 .secondroll{
-    border: 1px dotted black;
+    border: 1px  black;
+    background-color: rgb(95, 42, 155);
 
 }
 .result{
   display: inline-block;
     margin:0;
-
+    width: 100px;
+    height: 98px;
+    font-size: 45px;
 
 }
 .fullframe{
   text-align: justify;
-  font-size: 12px; /* IE 9/10 fix */
+  font-size: 18px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
 }
 .fullframe li {
  display: inline-block;
 
-  border: 1px double black;
-  background-color: #42b983;
+  border: 4px double black;
+  background-color:white;
   margin: 0;
-}
-.fullframe :after {
-  content: '';
-  width: 100%; /* Ensures justification for single lines */
+    background-color: rgb(77, 0, 139); /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
+  
+  
 }
+
 .scorebtns {
     text-align: justify;
+       height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 
 }
 .addscorebtn{
-  color:black;
-  background-color: lightcyan;
-  border: 1px dotted black;
-  font-size: 25px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
-
+.newgamebutton{
+   background-color:maroon;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 </style>
